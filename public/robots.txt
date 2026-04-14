@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jerseycityweb.com/sitemap.xml

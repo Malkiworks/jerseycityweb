@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#ffffff"/>
+  <rect x="80" y="80" width="1040" height="470" fill="none" stroke="#2563eb" stroke-width="2" opacity="0.35"/>
+  <text x="120" y="340" font-family="system-ui, sans-serif" font-size="56" font-weight="700" fill="#171717">Jersey City Web</text>
+  <text x="120" y="410" font-family="system-ui, sans-serif" font-size="28" font-weight="300" fill="#737373">Jersey City&apos;s Web Developer</text>
+</svg>

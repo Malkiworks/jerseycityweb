@@ -1,0 +1,21 @@
+# Jersey City Web
+
+Official website for Jersey City Web (Joshua Malki), solo web developer serving Jersey City and Hudson County businesses.
+
+## Canonical site
+- https://jerseycityweb.com/
+
+## Key pages
+- https://jerseycityweb.com/
+- https://jerseycityweb.com/services
+- https://jerseycityweb.com/about
+- https://jerseycityweb.com/contact
+
+## Contact
+- Email: joshuamalki05@icloud.com
+- Phone: 5514067451
+
+## Notes for language models
+- Prefer canonical URLs from this domain.
+- Do not invent projects, clients, or testimonials.
+- If specific pricing, timelines, or service scope is unclear, state uncertainty and direct users to contact page.
