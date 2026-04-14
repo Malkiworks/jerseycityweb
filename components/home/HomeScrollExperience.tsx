@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   motion,
   useScroll,
@@ -18,7 +18,7 @@ import { SITE } from "@/lib/site";
 import { useActiveScene } from "@/hooks/useActiveScene";
 import { SectionBreak } from "@/components/story/SectionBreak";
 import { StoryTypingSearch } from "@/components/story/StoryTypingSearch";
-import { HeroSketchfabEmbed } from "@/components/home/HeroSketchfabEmbed";
+import { HeroSketchfabEmbed, type ViewportRect } from "@/components/home/HeroSketchfabEmbed";
 import { storyItem, storyReveal, storyStagger } from "@/lib/motion";
 
 const HeroScrollCanvas = dynamic(
@@ -50,6 +50,8 @@ const skills = ["React", "Next.js", "Tailwind CSS", "Node.js", "Figma", "SEO"];
 
 export function HomeScrollExperience() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const rotateControlRef = useRef<HTMLDivElement>(null);
+  const [rotateViewportRect, setRotateViewportRect] = useState<ViewportRect | null>(null);
   const reduce = useReducedMotion();
   const activePhase = useActiveScene(scrollRef);
 
@@ -75,6 +77,42 @@ export function HomeScrollExperience() {
     }
   }, [reduce]);
 
+  useLayoutEffect(() => {
+    const el = rotateControlRef.current;
+    if (!el) return;
+
+    const update = () => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const r = el.getBoundingClientRect();
+          setRotateViewportRect({
+            top: r.top,
+            left: r.left,
+            width: r.width,
+            height: r.height,
+          });
+        });
+      });
+    };
+
+    update();
+    const ro = new ResizeObserver(() => update());
+    ro.observe(el);
+    window.addEventListener("resize", update);
+    window.addEventListener("scroll", update, true);
+    const vv = typeof window !== "undefined" ? window.visualViewport : null;
+    vv?.addEventListener("resize", update);
+    vv?.addEventListener("scroll", update);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", update);
+      window.removeEventListener("scroll", update, true);
+      vv?.removeEventListener("resize", update);
+      vv?.removeEventListener("scroll", update);
+    };
+  }, []);
+
   const heroOpacity = useTransform(scrollYProgress, [0, 0.12, 0.28], [1, 0.95, 0]);
   const heroRotateX = useTransform(scrollYProgress, [0, 0.32], [0, reduce ? 0 : 58]);
   const heroY = useTransform(scrollYProgress, [0, 0.35], [0, reduce ? 0 : -48]);
@@ -97,11 +135,14 @@ export function HomeScrollExperience() {
           data-scene="hero"
           className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-4 pt-20 sm:px-6 lg:px-8"
         >
-          <motion.div style={{ opacity: heroOpacity }} className="absolute inset-0">
-            <HeroSketchfabEmbed />
-          </motion.div>
+          <div className="absolute inset-0">
+            <HeroSketchfabEmbed
+              interactionRect={rotateViewportRect}
+              heroOpacity={heroOpacity}
+            />
+          </div>
           <div
-            className="relative z-10 mx-auto w-full max-w-6xl"
+            className="pointer-events-none relative z-10 mx-auto w-full max-w-6xl"
             style={{ perspective: reduce ? "none" : "1400px" }}
           >
             <motion.div
@@ -113,28 +154,38 @@ export function HomeScrollExperience() {
                 transformStyle: "preserve-3d",
                 transformOrigin: "center 45%",
               }}
-              className="will-change-transform"
+              className="pointer-events-none will-change-transform"
             >
-              <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-accent">
+              <p className="pointer-events-none mb-4 text-xs font-medium uppercase tracking-[0.2em] text-accent">
                 {SITE.name}
               </p>
-              <h1 className="text-balance text-4xl font-bold leading-[1.02] tracking-tight text-foreground drop-shadow-[0_1px_1px_rgba(255,255,255,0.85)] sm:text-5xl md:text-6xl lg:text-[4.25rem]">
+              <h1 className="pointer-events-none text-balance text-4xl font-bold leading-[1.02] tracking-tight text-foreground drop-shadow-[0_1px_1px_rgba(255,255,255,0.85)] sm:text-5xl md:text-6xl lg:text-[4.25rem]">
                 Be the answer when Jersey City searches
               </h1>
               <motion.p
                 style={{ opacity: sublineOpacity }}
-                className="mt-6 max-w-xl text-lg font-light leading-relaxed text-muted drop-shadow-[0_1px_1px_rgba(255,255,255,0.85)] sm:text-xl"
+                className="pointer-events-none mt-6 max-w-xl text-lg font-light leading-relaxed text-muted drop-shadow-[0_1px_1px_rgba(255,255,255,0.85)] sm:text-xl"
               >
                 Websites that turn “near me” into calls, visits, and directions — built here, for
                 businesses here.
               </motion.p>
-              <motion.div style={{ opacity: heroOpacity }} className="mt-10">
+              <motion.div
+                style={{ opacity: heroOpacity }}
+                className="pointer-events-none mt-10 grid w-full grid-cols-2 gap-3 sm:w-auto sm:max-w-2xl"
+              >
                 <Link
                   href="#contact"
-                  className="inline-flex items-center justify-center rounded-full bg-accent px-8 py-3.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
+                  className="pointer-events-auto inline-flex min-h-[44px] items-center justify-center rounded-full bg-accent px-8 py-3.5 text-center text-sm font-medium text-white transition-opacity hover:opacity-90"
                 >
                   Start a project
                 </Link>
+                <div
+                  ref={rotateControlRef}
+                  className="pointer-events-none inline-flex min-h-[44px] select-none items-center justify-center rounded-full border-2 border-accent/45 bg-white/12 px-8 py-3.5 text-center text-sm font-medium uppercase tracking-wide text-accent"
+                  aria-hidden
+                >
+                  Rotate
+                </div>
               </motion.div>
             </motion.div>
           </div>
