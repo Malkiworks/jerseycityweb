@@ -50,6 +50,11 @@ export const metadata: Metadata = {
       "Solo web developer in Jersey City, NJ. Web design, development, SEO, and maintenance for local businesses.",
     images: ["/og.svg"],
   },
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/apple-icon.svg", type: "image/svg+xml" }],
+    shortcut: ["/icon.svg"],
+  },
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION,
   },
