@@ -14,7 +14,7 @@ export function HeroSketchfabEmbed({ className = "" }: HeroSketchfabEmbedProps) 
         allowFullScreen
         className="h-full w-full scale-[1.2] border-0"
       />
-      <div className="absolute inset-0 bg-white/68 sm:bg-white/40" />
+      <div className="pointer-events-none absolute inset-0 bg-white/68 sm:bg-white/40" />
     </div>
   );
 }

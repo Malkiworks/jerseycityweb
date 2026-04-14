@@ -55,7 +55,8 @@ export const metadata: Metadata = {
   },
 };
 
-const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const GA_MEASUREMENT_ID =
+  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-0N819GMBNW";
 
 export default function RootLayout({
   children,
