@@ -9,31 +9,31 @@ export type Service = {
 
 export const SERVICES: Service[] = [
   {
-    title: "Web Design",
+    title: "Website Package",
     description:
       "Wireframes, visual direction, and responsive layouts that match your brand without clutter.",
-    price: "From $1,500",
+    price: "From $250",
     icon: "design",
   },
   {
     title: "Web Development",
     description:
       "Next.js and React builds with clean components, accessible markup, and performance in mind.",
-    price: "From $3,500",
+    price: "From $450",
     icon: "code",
   },
   {
     title: "SEO Setup",
     description:
       "Metadata, structured data, sitemaps, and Core Web Vitals tuning so search engines understand you.",
-    price: "From $800",
+    price: "From $200",
     icon: "seo",
   },
   {
     title: "Maintenance",
     description:
       "Updates, hosting coordination, analytics checks, and small fixes on a predictable cadence.",
-    price: "From $150 / mo",
+    price: "From $49 / mo",
     icon: "maint",
   },
 ];
