@@ -13,6 +13,13 @@ const config: Config = {
         foreground: "var(--foreground)",
         accent: "var(--accent)",
         muted: "var(--muted)",
+        border: "var(--border)",
+        input: "var(--input)",
+        primary: "var(--primary)",
+        "primary-foreground": "var(--primary-foreground)",
+        "muted-foreground": "var(--muted-foreground)",
+        destructive: "var(--destructive)",
+        "destructive-foreground": "var(--destructive-foreground)",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],

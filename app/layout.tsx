@@ -2,9 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
 import { SITE } from "@/lib/site";
+import { Navbar } from "@/components/ui/navbar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,8 +23,17 @@ export const metadata: Metadata = {
     template: `%s · ${SITE.name}`,
   },
   description:
-    "Solo web developer in Jersey City, NJ. Web design, development, SEO, and maintenance for local businesses.",
+    "Joshua Malki — affordable web designer and developer in Jersey City, NJ. Cheap professional websites with SEO, Google Analytics, and Search Console included.",
   metadataBase: new URL(SITE.url),
+  authors: [{ name: SITE.owner, url: SITE.url }],
+  creator: SITE.owner,
+  publisher: SITE.name,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" },
+  },
+  category: "Web Design",
   openGraph: {
     title: `${SITE.name} · ${SITE.tagline}`,
     description:
@@ -51,9 +59,9 @@ export const metadata: Metadata = {
     images: ["/og.svg"],
   },
   icons: {
-    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
-    apple: [{ url: "/apple-icon.svg", type: "image/svg+xml" }],
-    shortcut: ["/icon.svg"],
+    icon: [{ url: "/Whisk_f2150f9c1ed6cbeb410412c7d4532126dr.jpeg", type: "image/jpeg" }],
+    apple: [{ url: "/Whisk_f2150f9c1ed6cbeb410412c7d4532126dr.jpeg", type: "image/jpeg" }],
+    shortcut: ["/Whisk_f2150f9c1ed6cbeb410412c7d4532126dr.jpeg"],
   },
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION,
@@ -88,8 +96,9 @@ export default function RootLayout({
           </>
         ) : null}
         <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <div className="pt-14">
+          {children}
+        </div>
       </body>
     </html>
   );
