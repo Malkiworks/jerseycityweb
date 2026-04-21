@@ -59,9 +59,9 @@ export const metadata: Metadata = {
     images: ["/og.svg"],
   },
   icons: {
-    icon: [{ url: "/Whisk_f2150f9c1ed6cbeb410412c7d4532126dr.jpeg", type: "image/jpeg" }],
-    apple: [{ url: "/Whisk_f2150f9c1ed6cbeb410412c7d4532126dr.jpeg", type: "image/jpeg" }],
-    shortcut: ["/Whisk_f2150f9c1ed6cbeb410412c7d4532126dr.jpeg"],
+    icon: [{ url: "/favicon.png", type: "image/png" }],
+    apple: [{ url: "/favicon.png", type: "image/png" }],
+    shortcut: ["/favicon.png"],
   },
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION,
